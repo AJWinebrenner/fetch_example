@@ -1,52 +1,54 @@
 let launches = [];
 
-const loadData = () => {
-    fetch("https://api.spacexdata.com/v5/launches")
-        .then(result => result.json())
-        .then(data => launches = data)
-        .then(() => {
-            const list = document.querySelector("#launch-list");
-            launches.forEach((launch) => {
-                const listItem = document.createElement("li");
-                listItem.classList.add("card1");
-                listItem.classList.add("flexy");
+const button = document.querySelector("#load-btn");
 
-                const title = document.createElement("h2");
-                title.innerText = `Flight No: ${launch.flight_number} - ${launch.name}`;
-            
-                const details = document.createElement("p");
-                details.innerText = `\n
-                Success: ${launch.success}\n
-                Details: ${launch.details}\n
-                Date of Launch: ${launch.date_local}`;
+const loadData = async () => {
+    const raw = await fetch("https://api.spacexdata.com/v5/launches")
+    const launches = await raw.json();
+        
+    const list = document.querySelector("#launch-list");
+    launches.forEach((launch) => {
+        const listItem = document.createElement("li");
+        listItem.classList.add("card1");
+        listItem.classList.add("flexy");
 
-                const article = document.createElement("a");
-                article.classList.add("card__link");
-                article.innerText = "\nSee article";
-                article.href = launch.links.article;
+        const title = document.createElement("h2");
+        title.innerText = `Flight No: ${launch.flight_number} - ${launch.name}`;
+    
+        const details = document.createElement("p");
+        details.innerText = `\n
+        Success: ${launch.success}\n
+        Details: ${launch.details}\n
+        Date of Launch: ${launch.date_local}`;
 
-                const image = document.createElement("img");
-                image.src = launch.links.patch.small;
-                image.alt = `image for ${launch.name} launch`;
-                image.classList.add("img--png");
+        const article = document.createElement("a");
+        article.classList.add("card__link");
+        article.innerText = "\nSee article";
+        article.href = launch.links.article;
 
-                const imageBox = document.createElement("div");
-                imageBox.classList.add("img--box");
-                imageBox.classList.add("flexy");
-                imageBox.appendChild(image);
+        const image = document.createElement("img");
+        image.src = launch.links.patch.small;
+        image.alt = `image for ${launch.name} launch`;
+        image.classList.add("img--png");
 
-                const textBox = document.createElement("div");
-                textBox.classList.add("card2")
-                textBox.appendChild(title);
-                textBox.appendChild(details);
-                textBox.appendChild(article);
-                
-                listItem.appendChild(textBox);
-                listItem.appendChild(imageBox);
-                
-                list.appendChild(listItem);
-            })
-        })
+        const imageBox = document.createElement("div");
+        imageBox.classList.add("img--box");
+        imageBox.classList.add("flexy");
+        imageBox.appendChild(image);
+
+        const textBox = document.createElement("div");
+        textBox.classList.add("card2")
+        textBox.appendChild(title);
+        textBox.appendChild(details);
+        textBox.appendChild(article);
+        
+        listItem.appendChild(textBox);
+        listItem.appendChild(imageBox);
+        
+        list.appendChild(listItem);
+    })
 }
 
-loadData();
+// loadData();
+
+button.addEventListener("click", loadData);
