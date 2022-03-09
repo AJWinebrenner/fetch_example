@@ -1,0 +1,68 @@
+:root {
+    --image-dim: 300px;
+    --card-width: calc(var(--image-dim) * 2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family: 'Space Mono', monospace;
+    background-color: #111111;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    padding: 0.25em;
+    margin: 0.5em;
+    background-color: #222222;
+    border-radius: 1em;
+}
+
+h2 {
+    text-align: center;
+}
+
+.flexy {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1em;
+}
+
+.card1 {
+    background-color: #222222;
+    border-radius: 1em;
+    margin: 1em;
+    padding: 1em;
+    list-style: none;
+    min-width: var(--card-width);
+}
+
+.card2 {
+    background-color: #333333;
+    border-radius: 1em;
+    padding: 1em;
+    width: 100%;
+    min-height: var(--image-dim);
+}
+
+.card__link {
+    color: #cccccc;
+    text-decoration: none;
+}
+
+.img--box {
+    background-color: #111111;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.img--png {
+    width: var(--image-dim);
+    height: var(--image-dim);
+}
