@@ -5,8 +5,15 @@ const button = document.querySelector("#load-btn");
 const loadData = async () => {
     const raw = await fetch("https://api.spacexdata.com/v5/launches")
     const launches = await raw.json();
-        
-    const list = document.querySelector("#launch-list");
+
+    const page = document.querySelector("main");
+    let list = document.querySelector("#launch-list");
+    page.removeChild(list);
+
+    list = document.createElement("ul");
+    list.setAttribute("id","launch-list");
+    page.appendChild(list);
+
     launches.forEach((launch) => {
         const listItem = document.createElement("li");
         listItem.classList.add("card1");
