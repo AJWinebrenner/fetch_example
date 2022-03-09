@@ -17,8 +17,8 @@ const loadData = async () => {
     
         const details = document.createElement("p");
         details.innerText = `\n
-        Success: ${launch.success}\n
-        Details: ${launch.details}\n
+        --${((launch.success) ? "Success" : "Failure")}--\n
+        Details: ${(launch.details ? launch.details : "No details found")}\n
         Date of Launch: ${launch.date_local}`;
 
         const article = document.createElement("a");
